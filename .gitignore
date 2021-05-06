@@ -1,7 +1,6 @@
 ﻿# Public
 .DS_Store
 /.idea
-/.vscode
 
 # File
 *.meta
