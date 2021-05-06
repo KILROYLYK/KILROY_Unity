@@ -1,0 +1,718 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "ParamGroup",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "ParamGroup",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "ParamGroup",
+			"Name": "角度 Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "ParamGroup2",
+			"Name": "左眼　开闭"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "ParamGroup2",
+			"Name": "右眼"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "ParamGroup2",
+			"Name": "左眼　微笑"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "ParamGroup2",
+			"Name": "右眼　微笑"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "ParamGroup2",
+			"Name": "眼球 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "ParamGroup2",
+			"Name": "眼球 Y"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉上下"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　上下"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　角度"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　角度"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　変形"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　変形"
+		},
+		{
+			"Id": "Param38",
+			"GroupId": "ParamGroup2",
+			"Name": "眼角垂吊"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroup2",
+			"Name": "嘴部　变形"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroup2",
+			"Name": "嘴巴　张开和闭合"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "ParamGroup2",
+			"Name": "高光消失"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup2",
+			"Name": "眼睛睁大"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroup3",
+			"Name": "身体旋转　X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "ParamGroup3",
+			"Name": "身体旋转　Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "ParamGroup3",
+			"Name": "身体旋转　Z"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "ParamGroup3",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "Param26",
+			"GroupId": "ParamGroup3",
+			"Name": "全身y"
+		},
+		{
+			"Id": "Param37",
+			"GroupId": "ParamGroup3",
+			"Name": "全身z"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup6",
+			"Name": "左臂旋转"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "ParamGroup6",
+			"Name": "左 后小臂"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "ParamGroup6",
+			"Name": "左手掌"
+		},
+		{
+			"Id": "Param17",
+			"GroupId": "ParamGroup6",
+			"Name": "左前手出现"
+		},
+		{
+			"Id": "Param33",
+			"GroupId": "ParamGroup6",
+			"Name": "左    抬"
+		},
+		{
+			"Id": "Param36",
+			"GroupId": "ParamGroup6",
+			"Name": "左初始手消失"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "ParamGroup6",
+			"Name": "左 抬手小臂"
+		},
+		{
+			"Id": "Param19",
+			"GroupId": "ParamGroup6",
+			"Name": "左 抬手手掌"
+		},
+		{
+			"Id": "Param13",
+			"GroupId": "ParamGroup6",
+			"Name": "左手抬手臂叉腰手掌"
+		},
+		{
+			"Id": "Param14",
+			"GroupId": "ParamGroup6",
+			"Name": "左手抬手臂挠头手掌"
+		},
+		{
+			"Id": "Param20",
+			"GroupId": "ParamGroup6",
+			"Name": "左 挠头手指"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "ParamGroup6",
+			"Name": "左手抬手臂手背手掌"
+		},
+		{
+			"Id": "Param16",
+			"GroupId": "ParamGroup6",
+			"Name": "左手抬手臂握拳手掌"
+		},
+		{
+			"Id": "Param18",
+			"GroupId": "ParamGroup6",
+			"Name": "左手 摸下巴透视"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "ParamGroup9",
+			"Name": "右臂旋转"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "ParamGroup9",
+			"Name": "右 后小臂"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "ParamGroup9",
+			"Name": "右手掌"
+		},
+		{
+			"Id": "Param32",
+			"GroupId": "ParamGroup9",
+			"Name": "右前手出现"
+		},
+		{
+			"Id": "Param34",
+			"GroupId": "ParamGroup9",
+			"Name": "右   抬"
+		},
+		{
+			"Id": "Param35",
+			"GroupId": "ParamGroup9",
+			"Name": "初始右手消失"
+		},
+		{
+			"Id": "Param21",
+			"GroupId": "ParamGroup9",
+			"Name": "右 抬手小臂"
+		},
+		{
+			"Id": "Param22",
+			"GroupId": "ParamGroup9",
+			"Name": "右 抬手手掌"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "ParamGroup9",
+			"Name": "右手抬手臂叉腰手掌"
+		},
+		{
+			"Id": "Param29",
+			"GroupId": "ParamGroup9",
+			"Name": "右手抬手臂挠头手掌"
+		},
+		{
+			"Id": "Param23",
+			"GroupId": "ParamGroup9",
+			"Name": "右 挠头手指"
+		},
+		{
+			"Id": "Param30",
+			"GroupId": "ParamGroup9",
+			"Name": "左手抬手臂手背手掌"
+		},
+		{
+			"Id": "Param31",
+			"GroupId": "ParamGroup9",
+			"Name": "右手抬手臂握拳手掌"
+		},
+		{
+			"Id": "Param24",
+			"GroupId": "ParamGroup9",
+			"Name": "右手 摸下巴透视"
+		},
+		{
+			"Id": "Param25",
+			"GroupId": "ParamGroup4",
+			"Name": "耸肩"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "ParamGroup4",
+			"Name": "摇动　前发"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "ParamGroup4",
+			"Name": "摇动　侧发"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "ParamGroup4",
+			"Name": "高光左"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup4",
+			"Name": "高光右"
+		},
+		{
+			"Id": "Param27",
+			"GroupId": "ParamGroup4",
+			"Name": "腰带1"
+		},
+		{
+			"Id": "Param28",
+			"GroupId": "ParamGroup4",
+			"Name": "腰带2"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh29",
+			"GroupId": "ParamGroup7",
+			"Name": "[0]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh29",
+			"GroupId": "ParamGroup7",
+			"Name": "[1]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh29",
+			"GroupId": "ParamGroup7",
+			"Name": "[2]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh29",
+			"GroupId": "ParamGroup7",
+			"Name": "[3]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh29",
+			"GroupId": "ParamGroup7",
+			"Name": "[4]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh40",
+			"GroupId": "ParamGroup8",
+			"Name": "[0]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh40",
+			"GroupId": "ParamGroup8",
+			"Name": "[1]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh40",
+			"GroupId": "ParamGroup8",
+			"Name": "[2]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh40",
+			"GroupId": "ParamGroup8",
+			"Name": "[3]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh40",
+			"GroupId": "ParamGroup8",
+			"Name": "[4]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_belt1",
+			"GroupId": "ParamGroup10",
+			"Name": "[0]belt1"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_belt1",
+			"GroupId": "ParamGroup10",
+			"Name": "[1]belt1"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_belt1",
+			"GroupId": "ParamGroup10",
+			"Name": "[2]belt1"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_belt1",
+			"GroupId": "ParamGroup10",
+			"Name": "[3]belt1"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_belt1",
+			"GroupId": "ParamGroup10",
+			"Name": "[4]belt1"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh67",
+			"GroupId": "ParamGroup11",
+			"Name": "[0]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh67",
+			"GroupId": "ParamGroup11",
+			"Name": "[1]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh67",
+			"GroupId": "ParamGroup11",
+			"Name": "[2]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh67",
+			"GroupId": "ParamGroup11",
+			"Name": "[3]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh67",
+			"GroupId": "ParamGroup11",
+			"Name": "[4]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh74",
+			"GroupId": "ParamGroup12",
+			"Name": "[0]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh74",
+			"GroupId": "ParamGroup12",
+			"Name": "[1]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh74",
+			"GroupId": "ParamGroup12",
+			"Name": "[2]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh74",
+			"GroupId": "ParamGroup12",
+			"Name": "[3]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh74",
+			"GroupId": "ParamGroup12",
+			"Name": "[4]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh43",
+			"GroupId": "ParamGroup13",
+			"Name": "[0]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh43",
+			"GroupId": "ParamGroup13",
+			"Name": "[1]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh43",
+			"GroupId": "ParamGroup13",
+			"Name": "[2]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh43",
+			"GroupId": "ParamGroup13",
+			"Name": "[3]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh43",
+			"GroupId": "ParamGroup13",
+			"Name": "[4]piaodai l up"
+		},
+		{
+			"Id": "Param_Angle_Rotation_1_ArtMesh45",
+			"GroupId": "ParamGroup15",
+			"Name": "[0]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_2_ArtMesh45",
+			"GroupId": "ParamGroup15",
+			"Name": "[1]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_3_ArtMesh45",
+			"GroupId": "ParamGroup15",
+			"Name": "[2]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_4_ArtMesh45",
+			"GroupId": "ParamGroup15",
+			"Name": "[3]piaodai l"
+		},
+		{
+			"Id": "Param_Angle_Rotation_5_ArtMesh45",
+			"GroupId": "ParamGroup15",
+			"Name": "[4]piaodai l"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "头"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "表情"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "身体"
+		},
+		{
+			"Id": "ParamGroup6",
+			"GroupId": "",
+			"Name": "左手"
+		},
+		{
+			"Id": "ParamGroup9",
+			"GroupId": "",
+			"Name": "右手"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "物理"
+		},
+		{
+			"Id": "ParamGroup7",
+			"GroupId": "",
+			"Name": "piaodai l"
+		},
+		{
+			"Id": "ParamGroup8",
+			"GroupId": "",
+			"Name": "piaodai l up"
+		},
+		{
+			"Id": "ParamGroup10",
+			"GroupId": "",
+			"Name": "belt1"
+		},
+		{
+			"Id": "ParamGroup11",
+			"GroupId": "",
+			"Name": "piaodai l"
+		},
+		{
+			"Id": "ParamGroup12",
+			"GroupId": "",
+			"Name": "piaodai l"
+		},
+		{
+			"Id": "ParamGroup13",
+			"GroupId": "",
+			"Name": "piaodai l up"
+		},
+		{
+			"Id": "ParamGroup15",
+			"GroupId": "",
+			"Name": "piaodai l"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "Part_changearm_rightup_3",
+			"Name": "change arm rightup3"
+		},
+		{
+			"Id": "Part_changearm_leftup_1",
+			"Name": "change arm leftup1"
+		},
+		{
+			"Id": "hat",
+			"Name": "hat"
+		},
+		{
+			"Id": "meimao2",
+			"Name": "meimao"
+		},
+		{
+			"Id": "hair",
+			"Name": "hair"
+		},
+		{
+			"Id": "head",
+			"Name": "head"
+		},
+		{
+			"Id": "body",
+			"Name": "body"
+		},
+		{
+			"Id": "hat4",
+			"Name": "hat back"
+		},
+		{
+			"Id": "leg",
+			"Name": "leg"
+		},
+		{
+			"Id": "arm",
+			"Name": "arm"
+		},
+		{
+			"Id": "ArtMesh43_Skinning",
+			"Name": "piaodai l up(蒙皮)"
+		},
+		{
+			"Id": "Part5",
+			"Name": "piaodai l up(回转)"
+		},
+		{
+			"Id": "ArtMesh40_Skinning",
+			"Name": "piaodai l up(蒙皮)"
+		},
+		{
+			"Id": "Part4",
+			"Name": "piaodai l up(回转)"
+		},
+		{
+			"Id": "bizi",
+			"Name": "bizi"
+		},
+		{
+			"Id": "meimao",
+			"Name": "meimao"
+		},
+		{
+			"Id": "eye",
+			"Name": "eye"
+		},
+		{
+			"Id": "mouth",
+			"Name": "mouth"
+		},
+		{
+			"Id": "ear",
+			"Name": "ear"
+		},
+		{
+			"Id": "Part_downfrontarm_right_7",
+			"Name": "downfrontarm right 7"
+		},
+		{
+			"Id": "Part_downfrontarm_left_5",
+			"Name": "downfrontarm left 5"
+		},
+		{
+			"Id": "hood",
+			"Name": "hood"
+		},
+		{
+			"Id": "belt",
+			"Name": "belt"
+		},
+		{
+			"Id": "arm_left2",
+			"Name": "arm_right"
+		},
+		{
+			"Id": "arm_left",
+			"Name": "arm_left"
+		},
+		{
+			"Id": "zuoyan",
+			"Name": "zuoyan"
+		},
+		{
+			"Id": "youyan",
+			"Name": "youyan"
+		},
+		{
+			"Id": "ArtMesh74_Skinning",
+			"Name": "piaodai l(蒙皮)"
+		},
+		{
+			"Id": "Part3",
+			"Name": "piaodai l(回转)"
+		},
+		{
+			"Id": "ArtMesh67_Skinning",
+			"Name": "piaodai l(蒙皮)"
+		},
+		{
+			"Id": "Part",
+			"Name": "piaodai l(回转)"
+		},
+		{
+			"Id": "belt1_Skinning",
+			"Name": "belt1(蒙皮)"
+		},
+		{
+			"Id": "Part11",
+			"Name": "belt1(回转)"
+		},
+		{
+			"Id": "Part_changearm_rightup_4",
+			"Name": "change arm rightup4"
+		},
+		{
+			"Id": "Part_downbackarm_right_8",
+			"Name": "downbackarm right 8"
+		},
+		{
+			"Id": "Part_changearm_leftup_2",
+			"Name": "change arm leftup2"
+		},
+		{
+			"Id": "Part_downbackarm_left_6",
+			"Name": "downbackarm left 6"
+		},
+		{
+			"Id": "ArtMesh45_Skinning",
+			"Name": "piaodai l(蒙皮)"
+		},
+		{
+			"Id": "Part6",
+			"Name": "piaodai l(回转)"
+		},
+		{
+			"Id": "ArtMesh29_Skinning",
+			"Name": "piaodai l(蒙皮)"
+		},
+		{
+			"Id": "Part2",
+			"Name": "piaodai l(回转)"
+		}
+	]
+}

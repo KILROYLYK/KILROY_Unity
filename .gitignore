@@ -1,0 +1,33 @@
+﻿# Public
+.DS_Store
+/.idea
+/.vscode
+
+# File
+*.meta
+*.fbx
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp-firstpass.csproj
+DOTween.Modules.csproj
+KILROY_Unity.sln
+/Assets/csc.rsp
+/Assets/README.md
+
+# Folder
+/Temp
+/Packages
+/Library
+/Tools
+/Logs
+/obj
+/Assets/Packages
+/Assets/Library
+/Assets/Plugins
+
+# Media
+*.mp3
+*.mp4
+
+# Pack
+*.zip

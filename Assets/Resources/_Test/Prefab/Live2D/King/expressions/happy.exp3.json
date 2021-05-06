@@ -1,0 +1,152 @@
+{
+	"Type": "Live2D Expression",
+	"FadeInTime": 0.3,
+	"FadeOutTime": 0.3,
+	"Parameters": [
+		{
+			"Id": "ParamEyeLOpen",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"Value": 0.01,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param36",
+			"Value": 1.5,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param35",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param33",
+			"Value": 1.2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param34",
+			"Value": 1.2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param15",
+			"Value": 0.2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param30",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param5",
+			"Value": 12,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param11",
+			"Value": -24,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param19",
+			"Value": -30,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param6",
+			"Value": 12,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param21",
+			"Value": -24,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param22",
+			"Value": -30,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param7",
+			"Value": -19,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param8",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param38",
+			"Value": 0.5,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param17",
+			"Value": -2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param9",
+			"Value": 0,
+			"Blend": "Add"
+		}
+	]
+}

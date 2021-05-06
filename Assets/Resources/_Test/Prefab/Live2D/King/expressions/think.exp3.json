@@ -1,0 +1,162 @@
+{
+	"Type": "Live2D Expression",
+	"FadeInTime": 0.4,
+	"FadeOutTime": 0.4,
+	"Parameters": [
+		{
+			"Id": "ParamAngleZ",
+			"Value": -9.763,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"Value": -0.1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"Value": -0.1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"Value": 0.622,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"Value": -0.553,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"Value": -0.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"Value": -0.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"Value": -0.6,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"Value": -0.6,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"Value": -0.585,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"Value": 0.001,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param17",
+			"Value": 1.5,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param5",
+			"Value": -0.982,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param7",
+			"Value": -20.213,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param9",
+			"Value": 26.45,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param35",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param34",
+			"Value": 0.7,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param24",
+			"Value": 0.71,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param29",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param21",
+			"Value": -25.532,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param6",
+			"Value": -10,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param23",
+			"Value": 4.852,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param22",
+			"Value": 2.663,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"Value": -1.124,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param36",
+			"Value": 2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param33",
+			"Value": -1.8,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param15",
+			"Value": -0.5,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Param11",
+			"Value": -7.66,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamAngleY",
+			"Value": 4,
+			"Blend": "Add"
+		}
+	]
+}

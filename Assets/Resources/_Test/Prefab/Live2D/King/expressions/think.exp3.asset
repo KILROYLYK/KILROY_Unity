@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58229d41c24a7fb4aafd097ab43bcc2a, type: 3}
+  m_Name: think.exp3
+  m_EditorClassIdentifier: 
+  Type: Live2D Expression
+  FadeInTime: 0.4
+  FadeOutTime: 0.4
+  Parameters:
+  - Id: ParamAngleZ
+    Value: -9.763
+    Blend: 1
+  - Id: ParamEyeLOpen
+    Value: -0.1
+    Blend: 1
+  - Id: ParamEyeROpen
+    Value: -0.1
+    Blend: 1
+  - Id: ParamEyeBallX
+    Value: 0.622
+    Blend: 1
+  - Id: ParamEyeBallY
+    Value: -0.553
+    Blend: 1
+  - Id: ParamBrowLY
+    Value: -0.4
+    Blend: 1
+  - Id: ParamBrowRY
+    Value: -0.4
+    Blend: 1
+  - Id: ParamBrowLAngle
+    Value: -1
+    Blend: 1
+  - Id: ParamBrowLForm
+    Value: -0.6
+    Blend: 1
+  - Id: ParamBrowRAngle
+    Value: -1
+    Blend: 1
+  - Id: ParamBrowRForm
+    Value: -0.6
+    Blend: 1
+  - Id: ParamMouthForm
+    Value: -0.585
+    Blend: 1
+  - Id: ParamMouthOpenY
+    Value: 0.001
+    Blend: 1
+  - Id: Param17
+    Value: 1.5
+    Blend: 1
+  - Id: Param5
+    Value: -0.982
+    Blend: 1
+  - Id: Param7
+    Value: -20.213
+    Blend: 1
+  - Id: Param9
+    Value: 26.45
+    Blend: 1
+  - Id: Param35
+    Value: 1
+    Blend: 1
+  - Id: Param34
+    Value: 0.7
+    Blend: 1
+  - Id: Param24
+    Value: 0.71
+    Blend: 1
+  - Id: Param29
+    Value: 1
+    Blend: 1
+  - Id: Param21
+    Value: -25.532
+    Blend: 1
+  - Id: Param6
+    Value: -10
+    Blend: 1
+  - Id: Param23
+    Value: 4.852
+    Blend: 1
+  - Id: Param22
+    Value: 2.663
+    Blend: 1
+  - Id: ParamBodyAngleZ
+    Value: -1.124
+    Blend: 1
+  - Id: Param36
+    Value: 2
+    Blend: 1
+  - Id: Param33
+    Value: -1.8
+    Blend: 1
+  - Id: Param15
+    Value: -0.5
+    Blend: 1
+  - Id: Param11
+    Value: -7.66
+    Blend: 1
+  - Id: ParamAngleY
+    Value: 4
+    Blend: 1

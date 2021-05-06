@@ -1,0 +1,23 @@
+*.meta linguist-language=cs
+*.cs linguist-language=cs
+*.cs~ linguist-language=cs
+*.shader linguist-language=cs
+*.prefab linguist-language=cs
+*.anim linguist-language=cs
+*.controller linguist-language=cs
+*.asset linguist-language=cs
+*.unity linguist-language=cs
+*.log linguist-language=cs
+*.cache linguist-language=cs
+
+*.json linguist-language=cs
+
+*.md linguist-language=cs
+
+*.jpg linguist-language=cs
+*.jpeg linguist-language=cs
+*.png linguist-language=cs
+*.svg linguist-language=cs
+
+*.mp3 linguist-language=cs
+*.mp4 linguist-language=cs
