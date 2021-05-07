@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using KILROY.Base;
-using KILROY.Model;
 using KILROY.Tool;
 using KILROY.Controller;
 using KILROY.Project.Model;
