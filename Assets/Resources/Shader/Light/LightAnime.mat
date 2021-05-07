@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LightAnime
-  m_Shader: {fileID: 4800000, guid: a077dfbc600854f0aa952fd878b6995c, type: 3}
+  m_Shader: {fileID: 4800000, guid: b3b5bbeb779647348a7ae003c35e824a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2ccea542a11454635b74865c17f3dd7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -88,13 +88,20 @@ Material:
     - _Normal: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RampSmooth: 0
+    - _RampThreshold: 0.3
     - _Rim: 1
     - _RimBlur: 0.2
     - _RimLightness: 0.6
     - _RimRadiu: 0.9
+    - _RimSmooth: 0
+    - _RimThreshold: 1
+    - _Shininess: 0.1
     - _Side: 0
     - _SideWidth: 0
     - _SmoothnessTextureChannel: 0
+    - _SpecSmooth: 0
+    - _SpecThreshold: 0.3
     - _Specular: 1
     - _SpecularHighlights: 1
     - _SpecularLightness: 12
@@ -105,6 +112,9 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SideColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []

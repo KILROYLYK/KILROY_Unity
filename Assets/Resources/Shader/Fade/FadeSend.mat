@@ -104,7 +104,7 @@ Material:
     - _Parallax: 0.02
     - _SendBottom: 0.2
     - _SendCutoff: 1
-    - _SendScale: 0.21
+    - _SendScale: 0
     - _SendTop: 0.2
     - _SideWidth: 0.15
     - _SmoothnessTextureChannel: 0
