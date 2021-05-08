@@ -60,8 +60,9 @@ Shader "_Custom/Light/Rim"
         _RimLightness("RimLightness",Range(0,1)) = 1 // 轮廓光强度
         _RimRadiu("RimRadiu",Range(0,1)) = 0.9 // 轮廓光半径
         _RimBlur("RimBlur",Range(0,1)) = 0.6 // 轮廓光虚化
+        [Enum(Open,0,Close,1)] _Side("_Side",Range(0,1)) = 0 // 边开关
         _SideColor("SideColor",Color) = (1,1,1,1) // 边颜色
-        _SideWidth("SideWidth",Range(-0.1,1)) = -0.1 // 边宽度
+        _SideWidth("SideWidth",Range(0,1)) = 0 // 边宽度
         //---------- 拓展 End ----------//
     }
 
@@ -253,6 +254,7 @@ Shader "_Custom/Light/Rim"
             CGPROGRAM
             #pragma vertex vertRim
             #pragma fragment fragRim
+            
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
 
@@ -260,6 +262,7 @@ Shader "_Custom/Light/Rim"
             float4 _RimColor;
             float _RimRadiu;
             float _RimBlur;
+            float _Side;
             float _SideWidth;
             float4 _SideColor;
 
@@ -300,7 +303,12 @@ Shader "_Custom/Light/Rim"
                 float rimSmooth = max(0, diffDot) * smoothstep(_RimRadiu - _RimBlur, _RimRadiu + _RimBlur, rimDot);
                 float3 rim = rimSmooth * _RimLightness * _RimColor * _LightColor0;
 
-                return float4(lerp(_SideColor.rgb, rim, step(rimDot - 0.05, 1 - _SideWidth)), 1);
+                // Side
+                float3 side = lerp(_SideColor.rgb, rim, step(rimDot, 1 - _SideWidth));
+
+                float3 color = lerp(side, rim, step( _Side,0));
+
+                return float4(color, 1);
             }
             ENDCG
         }

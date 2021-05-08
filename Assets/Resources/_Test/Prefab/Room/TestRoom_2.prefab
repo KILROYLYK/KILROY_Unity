@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc3c8c52ef059440a89df5bd4e0ab836, type: 2}
+  - {fileID: 2100000, guid: 7d2e8b6aef4ed4124b31ef683e762e10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6999235535056420283}
   m_Layer: 0
-  m_Name: TestShader
+  m_Name: TestRoom_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

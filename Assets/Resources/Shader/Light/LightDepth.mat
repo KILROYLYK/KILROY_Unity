@@ -23,10 +23,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Color:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,14 +40,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2ccea542a11454635b74865c17f3dd7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -63,56 +55,32 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 0.3
     - _Brightness: 1
     - _BumpScale: 1
-    - _Color: 0.675
+    - _CameraRang: 5000
     - _Cutoff: 0.5
-    - _DepthBrightness: 1
-    - _DepthLightBrightness: 1
-    - _DepthLightScannerDistance: 0
-    - _DepthLightScannerWidth: 0
-    - _DepthLightShadow: 1
-    - _DepthLightShadowRange: 3
-    - _DepthRange: 3.89
     - _DetailNormalMapScale: 1
-    - _Diffuse: 0.5
-    - _Distance: 800
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Light: 0.8
+    - _Lightness: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rim: 0.6
-    - _RimBlur: 0.3
-    - _RimRadiu: 0.6
     - _Scanner: 0
     - _ScannerDistance: 0
     - _ScannerWidth: 0
-    - _Shadow: 20
     - _ShadowRange: 3
-    - _Side: 2
+    - _ShowRange: 10
     - _SmoothnessTextureChannel: 0
-    - _Specular: 0.5
     - _SpecularHighlights: 1
-    - _SpecularPow: 3.4
     - _SrcBlend: 1
-    - _Temp: 65.1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DepthLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SideColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
