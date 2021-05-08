@@ -56,12 +56,12 @@ Shader "_Custom/Light/Anime"
         [HideInInspector] _ZWrite("__zw", Float) = 1
 
         //---------- 拓展 Start ----------//
-        _Diffuse("Diffuse",Range(0,2)) = 1 // 扩散光
+        _Diffuse("Diffuse",Range(0,2)) = 2 // 扩散光
         _DiffuseRange("DiffuseRange",Range(-1,1)) = 0 // 扩散范围
-        _DiffuseLightnessBright("DiffuseLightnessBright",Range(0,2)) = 0 // 扩散明亮面亮度
-        _DiffuseLightnessDark("DiffuseLightnessDark",Range(0,2)) = 0 // 扩散阴暗面亮度
-        _Specular("Specular",Range(0,1)) = 1 // 高光
-        _SpecularLightness("SpecularLightness",Range(1,25)) = 5 // 高光亮度
+        _DiffuseBright("DiffuseBright",Range(0,2)) = 0.6 // 扩散明亮面亮度
+        _DiffuseDark("DiffuseDark",Range(0,2)) = 0.5 // 扩散阴暗面亮度
+        _Specular("Specular",Range(0,0.5)) = 0.5 // 高光
+        _SpecularRange("SpecularRange",Range(1,25)) = 25 // 高光范围
         //---------- 拓展 End ----------//
     }
 
@@ -115,37 +115,10 @@ Shader "_Custom/Light/Anime"
 
             float _Diffuse;
             float _DiffuseRange;
-            float _DiffuseLightnessBright;
-            float _DiffuseLightnessDark;
+            float _DiffuseBright;
+            float _DiffuseDark;
             float _Specular;
-            float _SpecularLightness;
-
-            half4 BRDF3_Unity_PBS_Expand(half3 diffColor, half3 specColor, half oneMinusReflectivity, half smoothness,
-                                         float3 normal, float3 viewDir, UnityLight light, UnityIndirect gi)
-            {
-                float3 reflDir = reflect(viewDir, normal);
-                
-                // half nl = saturate(dot(normal, light.dir));
-                half nv = saturate(dot(normal, viewDir));
-                
-                half2 rlPow4AndFresnelTerm = Pow4(float2(dot(reflDir, light.dir), 1 - nv));
-                half rlPow4 = rlPow4AndFresnelTerm.x;
-                // half fresnelTerm = rlPow4AndFresnelTerm.y;
-                // half grazingTerm = saturate(smoothness + (1 - oneMinusReflectivity));
-                
-                half3 color = BRDF3_Direct(diffColor, specColor, rlPow4, smoothness);
-                // color *= light.color * nl;
-                // color += BRDF3_Indirect(diffColor, specColor, gi, grazingTerm, fresnelTerm);
-
-                // half3 color = diffColor + specColor;
-
-                float diffDot = dot(normal, light.dir);
-                diffDot = diffDot >= _DiffuseRange ? _DiffuseLightnessBright : _DiffuseLightnessDark;
-                float3 diff = diffDot * _Diffuse;
-                color *= diff * light.color;
-
-                return half4(color, 1);
-            }
+            float _SpecularRange;
 
             half4 fragBaseExpand(VertexOutputForwardBase i) : SV_Target
             {
@@ -159,11 +132,22 @@ Shader "_Custom/Light/Anime"
                 UnityLight mainLight = MainLight();
                 UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld);
 
-                half occlusion = Occlusion(i.tex.xy);
-                UnityGI gi = FragmentGI(s, occlusion, i.ambientOrLightmapUV, atten, mainLight);
+                half3 color = s.diffColor;
 
-                half4 c = BRDF3_Unity_PBS_Expand(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness,
-                                                 s.normalWorld, -s.eyeVec, gi.light, gi.indirect);
+                // Diffuse
+                float diffDot = dot(s.normalWorld, mainLight.dir);
+                diffDot = diffDot >= _DiffuseRange ? _DiffuseBright : _DiffuseDark;
+                float3 diff = diffDot * _Diffuse;
+                color *= diff * mainLight.color;
+
+                // Specular
+                float3 specRefl = reflect(mainLight.dir, s.normalWorld);
+                float specDot = pow(max(0, dot(i.eyeVec, specRefl)), _SpecularRange);
+                specDot = smoothstep(0.001, 0.1, specDot);
+                float3 spec = specDot * _Specular;
+                color += spec * mainLight.color;
+
+                half4 c = half4(color, 1);
                 c.rgb += Emission(i.tex.xy);
 
                 UNITY_EXTRACT_FOG_FROM_EYE_VEC(i);
@@ -176,71 +160,69 @@ Shader "_Custom/Light/Anime"
         }
 
         // 附加灯光渲染（每次通过一灯）
-        //        Pass
-        //        {
-        //            Name "FORWARD_DELTA"
-        //
-        //            Tags
-        //            {
-        //                "LightMode"="ForwardAdd"
-        //            }
-        //
-        //            Blend [_SrcBlend] One
-        //            ZWrite Off
-        //            ZTest LEqual
-        //            Fog // 在加和雾中应为黑色
-        //            {
-        //                Color (0,0,0,0)
-        //            }
-        //
-        //            CGPROGRAM
-        //            #pragma target 3.0
-        //            #pragma shader_feature_local _NORMALMAP
-        //            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-        //            #pragma shader_feature_local _METALLICGLOSSMAP
-        //            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-        //            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
-        //            #pragma shader_feature_local_fragment _DETAIL_MULX2
-        //            #pragma shader_feature_local _PARALLAXMAP
-        //            #pragma multi_compile_fwdadd_fullshadows
-        //            #pragma multi_compile_fog
-        //            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-        //            #pragma vertex vertAdd
-        //            #pragma fragment fragAdd
-        //
-        //            #include "UnityStandardCoreForward.cginc"
-        //            ENDCG
-        //        }
+        Pass
+        {
+            Name "FORWARD_DELTA"
+
+            Tags
+            {
+                "LightMode"="ForwardAdd"
+            }
+
+            Blend [_SrcBlend] One
+            ZWrite Off
+            ZTest LEqual
+            Fog // 在加和雾中应为黑色
+            {
+                Color (0,0,0,0)
+            }
+
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma shader_feature_local _NORMALMAP
+            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+            #pragma shader_feature_local _METALLICGLOSSMAP
+            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
+            #pragma shader_feature_local_fragment _DETAIL_MULX2
+            #pragma shader_feature_local _PARALLAXMAP
+            #pragma multi_compile_fwdadd_fullshadows
+            #pragma multi_compile_fog
+            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
+            #pragma vertex vertAdd
+            #pragma fragment fragAdd
+
+            #include "UnityStandardCoreForward.cginc"
+            ENDCG
+        }
 
         // 阴影渲染
-        //        Pass
-        //        {
-        //            Name "SHADOWCASTER"
-        //
-        //            Tags
-        //            {
-        //                "LightMode"="ShadowCaster"
-        //            }
-        //
-        //            ZWrite On
-        //            ZTest LEqual
-        //            Cull Off
-        //
-        //            CGPROGRAM
-        //            #pragma target 3.0
-        //            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-        //            #pragma shader_feature_local _METALLICGLOSSMAP
-        //            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-        //            #pragma shader_feature_local _PARALLAXMAP
-        //            #pragma multi_compile_shadowcaster
-        //            #pragma multi_compile_instancing
-        //            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-        //            // #pragma vertex vertShadowCaster
-        //            // #pragma fragment fragShadowCaster
-        //
-        //            // #include "UnityStandardShadow.cginc"
-        //            ENDCG
-        //        }
+        Pass
+        {
+            Name "SHADOWCASTER"
+
+            Tags
+            {
+                "LightMode"="ShadowCaster"
+            }
+
+            ZWrite On ZTest LEqual
+
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+            #pragma shader_feature_local _METALLICGLOSSMAP
+            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature_local _PARALLAXMAP
+            #pragma multi_compile_shadowcaster
+            #pragma multi_compile_instancing
+            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
+            #pragma vertex vertShadowCaster
+            #pragma fragment fragShadowCaster
+
+            #include "UnityStandardShadow.cginc"
+            ENDCG
+        }
 
         // 延期通行证
         Pass
@@ -306,177 +288,3 @@ Shader "_Custom/Light/Anime"
     FallBack "VertexLit"
     // CustomEditor "StandardShaderGUI"
 }
-//{
-//    Properties
-//    {
-//        // Texture
-//        _Color("颜色", Color) = (1,1,1,1)
-//        _MainTex("纹理", 2D) = "white" {}
-//
-//        // Normal
-//        [Enum(Close,0,Open,1)] _Normal("Normal", Float) = 0 // 开启法线
-//        _NormalTexture("NormalTexture", 2D) = "black"{} // 法线纹理
-//
-//        // Bump
-//        [Enum(Close,0,Open,1)] _Bump("Bump", Float) = 0 // 开启凹凸
-//        _BumpTexture("BumpTexture", 2D) = "black"{} // 凹凸纹理
-//        _BumpScale("BumpScale", Range(0.1, 30)) = 30 // 凹凸程度
-//
-//        // Light
-//        _Lightness("Lightness",Range(0,1)) = 1 // 整体亮度
-//        _Ambient("Ambient",Range(0,1)) = 0.2 // 自然光
-//        _Diffuse("Diffuse",Range(0,1)) = 0.6 // 扩散光
-//        _DiffuseRange("DiffuseRange",Range(-1,1)) = 0 // 扩散范围
-//        _DiffuseBright("DiffuseBright",Range(-1,1)) = 0 // 扩散明亮面亮度
-//        _DiffuseDark("DiffuseDark",Range(-1,1)) = 0 // 扩散阴暗面亮度
-//        _Specular("Specular",Range(0,1)) = 1 // 高光
-//        _SpecularLightness("SpecularLightness",Range(1,25)) = 5 // 高光亮度
-//
-//        // Rim
-//        _RimLightness("RimLightness",Range(0,1)) = 1 // 轮廓光强度
-//        _RimColor("RimColor",Color) = (1,1,1,1) // 轮廓光颜色
-//        _RimRadiu("RimRadiu",Range(0,1)) = 0.9 // 轮廓光半径
-//        _RimBlur("RimBlur",Range(0,1)) = 0.6 // 轮廓光虚化
-//
-//        // Side
-//        _SideWidth("SideWidth",Range(0,1)) = 0 // 边
-//        _SideColor("SideColor",Color) = (1,1,1,1) // 边颜色
-//    }
-//
-//    SubShader
-//    {
-//        Tags
-//        {
-//            "RenderType"="Opaque"
-//        }
-//
-//        // 基础灯光渲染（方向光，发射，光照贴图，...）
-//        Pass
-//        {
-//            Name "FORWARD"
-//
-//            Tags
-//            {
-//                "LightMode"="ForwardBase"
-//            }
-//
-//            CGPROGRAM
-//            #pragma vertex vertBase
-//            #pragma fragment fragBase
-//
-//            #include "UnityCG.cginc"
-//            #include "UnityLightingCommon.cginc"
-//
-//            // Texture
-//            float4 _Color;
-//            sampler2D _MainTex;
-//
-//            // Normal
-//            float _Normal;
-//            sampler2D _NormalTexture;
-//
-//            // Bump
-//            float _Bump;
-//            sampler2D _BumpTexture;
-//            float4 _BumpTexture_TexelSize;
-//            float _BumpScale;
-//
-//            // Light
-//            float _Lightness;
-//            float _Ambient;
-//            float _Diffuse;
-//            float _DiffuseRange;
-//            float _DiffuseBright;
-//            float _DiffuseDark;
-//            float _Specular;
-//            float _SpecularLightness;
-//
-//            // Rim
-//            float _RimLightness;
-//            float4 _RimColor;
-//            float _RimRadiu;
-//            float _RimBlur;
-//
-//            // Side
-//            float _SideWidth;
-//            float4 _SideColor;
-//
-//            struct a2v
-//            {
-//                float4 vertex : POSITION;
-//                float3 normal : NORMAL;
-//                float2 uv: TEXCOORD0;
-//            };
-//
-//            struct v2f
-//            {
-//                float4 vertex : SV_POSITION;
-//                float3 normal : NORMAL;
-//                float2 uv: TEXCOORD0;
-//                float3 view: TEXCOORD1;
-//            };
-//
-//            v2f vertBase(a2v v)
-//            {
-//                v2f o;
-//                o.vertex = UnityObjectToClipPos(v.vertex);
-//                o.normal = UnityObjectToWorldNormal(v.normal);
-//                o.uv = v.uv;
-//                o.view = normalize(_WorldSpaceCameraPos.xyz - mul(unity_ObjectToWorld, v.vertex).xyz);
-//                return o;
-//            }
-//
-//            float4 fragBase(v2f i) : SV_Target
-//            {
-//                float3 light = normalize(_WorldSpaceLightPos0.xyz);
-//
-//                // Texture
-//                float4 text = tex2D(_MainTex, i.uv) * _Color;
-//
-//                // Normal
-//                float3 normalColor = UnpackNormal(tex2D(_NormalTexture, i.uv));
-//                fixed3 normalDot = dot(normalColor, light) / 2 + 0.5;
-//                fixed3 normal = normalDot * 5 * _LightColor0;
-//                text = lerp(text, float4(text.rgb * normal, 1), step(1, _Normal));
-//
-//                // Bump
-//                fixed bumpU = tex2D(_BumpTexture, i.uv + fixed2(-1.0 * _BumpTexture_TexelSize.x, 0)).r - tex2D(
-//                    _BumpTexture, i.uv + fixed2(1.0 * _BumpTexture_TexelSize.x, 0)).r;
-//                fixed bumpV = tex2D(_BumpTexture, i.uv + fixed2(0, -1.0 * _BumpTexture_TexelSize.y)).r - tex2D(
-//                    _BumpTexture, i.uv + fixed2(0, 1.0 * _BumpTexture_TexelSize.y)).r;
-//                fixed3 bumpDot = dot(fixed3(i.normal.x * bumpU * _BumpScale,
-//                                            i.normal.y * bumpV * _BumpScale,
-//                                            i.normal.z), light) / 2 + 0.5;
-//                fixed3 bump = bumpDot * 1.5 * _LightColor0;
-//                text = lerp(text, float4(text.rgb * bump, 1), step(1, _Bump));
-//
-//                // Ambient
-//                float3 ambi = _Ambient * _LightColor0;
-//
-//                // Diffuse
-//                float diffDot = dot(i.normal, light);
-//                diffDot = diffDot < _DiffuseRange ? _DiffuseDark : _DiffuseBright;
-//                float3 diff = diffDot * _Diffuse * _LightColor0;
-//
-//                // Specular
-//                float3 specRefl = reflect(-light, i.normal);
-//                float specDot = pow(max(0, dot(i.view, specRefl)), _SpecularLightness);
-//                specDot = smoothstep(0.005, 0.1, specDot);
-//                float3 spec = specDot * _Specular * _LightColor0;
-//
-//                // Rim
-//                float rimDotLight = dot(i.normal, light);
-//                float rimDotView = 1 - dot(i.normal, i.view);
-//                float rimSmooth = smoothstep(_RimRadiu - _RimBlur, _RimRadiu + _RimBlur, rimDotView)
-//                    * max(0, rimDotLight);
-//                float3 rim = rimSmooth * _RimLightness * _RimColor * _LightColor0;
-//
-//                return float4(lerp(_SideColor.rgb, text * float4((ambi + diff + spec + rim), 1) * _Lightness,
-//                                   step(rimDotView, 1 - _SideWidth)), 1);
-//            }
-//            ENDCG
-//        }
-//    }
-//
-//    FallBack "VertexLit"
-//}

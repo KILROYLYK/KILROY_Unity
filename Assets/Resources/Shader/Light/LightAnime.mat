@@ -83,17 +83,17 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Diffuse: 2
-    - _DiffuseBright: 1
-    - _DiffuseDark: 0.8
-    - _DiffuseLightnessBright: 0.3
-    - _DiffuseLightnessDark: 0.2
+    - _DiffuseBright: 0.6
+    - _DiffuseDark: 0.5
+    - _DiffuseLightnessBright: 0.6
+    - _DiffuseLightnessDark: 0.5
     - _DiffuseRange: 0
     - _DissolveScale: 0
     - _DissolveWidth: 0.1
     - _DstBlend: 0
     - _EdgeSmoothness: 0.523
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _Lightness: 100
     - _Metallic: 0
@@ -119,10 +119,11 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecSmooth: 0
     - _SpecThreshold: 0.3
-    - _Specular: 1
+    - _Specular: 0.5
     - _SpecularHighlights: 1
-    - _SpecularLightness: 20
+    - _SpecularLightness: 25
     - _SpecularPow: 20
+    - _SpecularRange: 81
     - _SpecularScale: 0.0336
     - _SrcBlend: 1
     - _UVSec: 0
