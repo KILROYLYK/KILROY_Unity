@@ -56,12 +56,12 @@ Shader "_Custom/Light/Rim"
         [HideInInspector] _ZWrite("__zw", Float) = 1
 
         //---------- 拓展 Start ----------//
-        _RimLightness("RimLightness",Range(0,1)) = 1 // 轮廓光强度
         _RimColor("RimColor",Color) = (1,1,1,1) // 轮廓光颜色
+        _RimLightness("RimLightness",Range(0,1)) = 1 // 轮廓光强度
         _RimRadiu("RimRadiu",Range(0,1)) = 0.9 // 轮廓光半径
         _RimBlur("RimBlur",Range(0,1)) = 0.6 // 轮廓光虚化
-        _SideWidth("SideWidth",Range(0,1)) = 0 // 边宽度
         _SideColor("SideColor",Color) = (1,1,1,1) // 边颜色
+        _SideWidth("SideWidth",Range(-0.1,1)) = -0.1 // 边宽度
         //---------- 拓展 End ----------//
     }
 

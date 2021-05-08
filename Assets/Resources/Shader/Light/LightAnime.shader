@@ -56,6 +56,12 @@ Shader "_Custom/Light/Anime"
         [HideInInspector] _ZWrite("__zw", Float) = 1
 
         //---------- 拓展 Start ----------//
+        _Diffuse("Diffuse",Range(0,2)) = 1 // 扩散光
+        _DiffuseRange("DiffuseRange",Range(-1,1)) = 0 // 扩散范围
+        _DiffuseLightnessBright("DiffuseLightnessBright",Range(0,2)) = 0 // 扩散明亮面亮度
+        _DiffuseLightnessDark("DiffuseLightnessDark",Range(0,2)) = 0 // 扩散阴暗面亮度
+        _Specular("Specular",Range(0,1)) = 1 // 高光
+        _SpecularLightness("SpecularLightness",Range(1,25)) = 5 // 高光亮度
         //---------- 拓展 End ----------//
     }
 
@@ -95,7 +101,7 @@ Shader "_Custom/Light/Anime"
             #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature_local_fragment _GLOSSYREFLECTIONS_OFF
             #pragma shader_feature_local _PARALLAXMAP
-            #pragma multi_compile_fwdbase
+            // #pragma multi_compile_fwdbase
             #pragma multi_compile_fog
             #pragma multi_compile_instancing
             // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
@@ -107,12 +113,62 @@ Shader "_Custom/Light/Anime"
             //---------- 拓展 Start ----------//
             #pragma fragment fragBaseExpand
 
+            float _Diffuse;
+            float _DiffuseRange;
+            float _DiffuseLightnessBright;
+            float _DiffuseLightnessDark;
+            float _Specular;
+            float _SpecularLightness;
+
+            half4 BRDF3_Unity_PBS_Expand(half3 diffColor, half3 specColor, half oneMinusReflectivity, half smoothness,
+                                         float3 normal, float3 viewDir, UnityLight light, UnityIndirect gi)
+            {
+                float3 reflDir = reflect(viewDir, normal);
+                
+                // half nl = saturate(dot(normal, light.dir));
+                half nv = saturate(dot(normal, viewDir));
+                
+                half2 rlPow4AndFresnelTerm = Pow4(float2(dot(reflDir, light.dir), 1 - nv));
+                half rlPow4 = rlPow4AndFresnelTerm.x;
+                // half fresnelTerm = rlPow4AndFresnelTerm.y;
+                // half grazingTerm = saturate(smoothness + (1 - oneMinusReflectivity));
+                
+                half3 color = BRDF3_Direct(diffColor, specColor, rlPow4, smoothness);
+                // color *= light.color * nl;
+                // color += BRDF3_Indirect(diffColor, specColor, gi, grazingTerm, fresnelTerm);
+
+                // half3 color = diffColor + specColor;
+
+                float diffDot = dot(normal, light.dir);
+                diffDot = diffDot >= _DiffuseRange ? _DiffuseLightnessBright : _DiffuseLightnessDark;
+                float3 diff = diffDot * _Diffuse;
+                color *= diff * light.color;
+
+                return half4(color, 1);
+            }
+
             half4 fragBaseExpand(VertexOutputForwardBase i) : SV_Target
             {
+                UNITY_APPLY_DITHER_CROSSFADE(i.pos.xy);
 
-                half4 iColor = fragForwardBaseInternal(i);
+                FRAGMENT_SETUP(s)
 
-                return iColor;
+                UNITY_SETUP_INSTANCE_ID(i);
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+
+                UnityLight mainLight = MainLight();
+                UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld);
+
+                half occlusion = Occlusion(i.tex.xy);
+                UnityGI gi = FragmentGI(s, occlusion, i.ambientOrLightmapUV, atten, mainLight);
+
+                half4 c = BRDF3_Unity_PBS_Expand(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness,
+                                                 s.normalWorld, -s.eyeVec, gi.light, gi.indirect);
+                c.rgb += Emission(i.tex.xy);
+
+                UNITY_EXTRACT_FOG_FROM_EYE_VEC(i);
+                UNITY_APPLY_FOG(_unity_fogCoord, c.rgb);
+                return OutputForward(c, s.alpha);
             }
 
             //---------- 拓展 End ----------//
@@ -120,71 +176,71 @@ Shader "_Custom/Light/Anime"
         }
 
         // 附加灯光渲染（每次通过一灯）
-        Pass
-        {
-            Name "FORWARD_DELTA"
-
-            Tags
-            {
-                "LightMode"="ForwardAdd"
-            }
-
-            Blend [_SrcBlend] One
-            ZWrite Off
-            ZTest LEqual
-            Fog // 在加和雾中应为黑色
-            {
-                Color (0,0,0,0)
-            }
-
-            CGPROGRAM
-            #pragma target 3.0
-            #pragma shader_feature_local _NORMALMAP
-            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-            #pragma shader_feature_local _METALLICGLOSSMAP
-            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
-            #pragma shader_feature_local_fragment _DETAIL_MULX2
-            #pragma shader_feature_local _PARALLAXMAP
-            #pragma multi_compile_fwdadd_fullshadows
-            #pragma multi_compile_fog
-            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-            #pragma vertex vertAdd
-            #pragma fragment fragAdd
-
-            #include "UnityStandardCoreForward.cginc"
-            ENDCG
-        }
+        //        Pass
+        //        {
+        //            Name "FORWARD_DELTA"
+        //
+        //            Tags
+        //            {
+        //                "LightMode"="ForwardAdd"
+        //            }
+        //
+        //            Blend [_SrcBlend] One
+        //            ZWrite Off
+        //            ZTest LEqual
+        //            Fog // 在加和雾中应为黑色
+        //            {
+        //                Color (0,0,0,0)
+        //            }
+        //
+        //            CGPROGRAM
+        //            #pragma target 3.0
+        //            #pragma shader_feature_local _NORMALMAP
+        //            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+        //            #pragma shader_feature_local _METALLICGLOSSMAP
+        //            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        //            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
+        //            #pragma shader_feature_local_fragment _DETAIL_MULX2
+        //            #pragma shader_feature_local _PARALLAXMAP
+        //            #pragma multi_compile_fwdadd_fullshadows
+        //            #pragma multi_compile_fog
+        //            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
+        //            #pragma vertex vertAdd
+        //            #pragma fragment fragAdd
+        //
+        //            #include "UnityStandardCoreForward.cginc"
+        //            ENDCG
+        //        }
 
         // 阴影渲染
-        Pass
-        {
-            Name "SHADOWCASTER"
-
-            Tags
-            {
-                "LightMode"="ShadowCaster"
-            }
-
-            ZWrite On
-            ZTest LEqual
-            Cull Off
-
-            CGPROGRAM
-            #pragma target 3.0
-            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-            #pragma shader_feature_local _METALLICGLOSSMAP
-            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-            #pragma shader_feature_local _PARALLAXMAP
-            #pragma multi_compile_shadowcaster
-            #pragma multi_compile_instancing
-            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-            // #pragma vertex vertShadowCaster
-            // #pragma fragment fragShadowCaster
-
-            // #include "UnityStandardShadow.cginc"
-            ENDCG
-        }
+        //        Pass
+        //        {
+        //            Name "SHADOWCASTER"
+        //
+        //            Tags
+        //            {
+        //                "LightMode"="ShadowCaster"
+        //            }
+        //
+        //            ZWrite On
+        //            ZTest LEqual
+        //            Cull Off
+        //
+        //            CGPROGRAM
+        //            #pragma target 3.0
+        //            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+        //            #pragma shader_feature_local _METALLICGLOSSMAP
+        //            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        //            #pragma shader_feature_local _PARALLAXMAP
+        //            #pragma multi_compile_shadowcaster
+        //            #pragma multi_compile_instancing
+        //            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
+        //            // #pragma vertex vertShadowCaster
+        //            // #pragma fragment fragShadowCaster
+        //
+        //            // #include "UnityStandardShadow.cginc"
+        //            ENDCG
+        //        }
 
         // 延期通行证
         Pass

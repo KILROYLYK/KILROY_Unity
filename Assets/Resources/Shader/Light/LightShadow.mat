@@ -70,7 +70,7 @@ Material:
     - _RimBlur: 0.6
     - _RimLightness: 1
     - _RimRadiu: 0.9
-    - _SideLightness: 0
+    - _SideLightness: 3.16
     - _SideWidth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
