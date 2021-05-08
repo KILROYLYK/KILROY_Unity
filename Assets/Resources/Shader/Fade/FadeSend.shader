@@ -106,11 +106,12 @@
             // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
             #pragma vertex vertBase
             // #pragma fragment fragBase
-            #pragma fragment fragBaseExpand
 
             #include "UnityStandardCoreForward.cginc"
 
             //---------- 拓展 Start ----------//
+            #pragma fragment fragBaseExpand
+
             float _SendScale;
             float4 _SideColor_1;
             float4 _SideColor_2;
@@ -173,11 +174,12 @@
             // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
             #pragma vertex vertAdd
             // #pragma fragment fragAdd
-            #pragma fragment fragAddExpand
 
             #include "UnityStandardCoreForward.cginc"
 
             //---------- 拓展 Start ----------//
+            #pragma fragment fragAddExpand
+
             float _SendScale;
 
             half4 fragAddExpand(VertexOutputForwardAdd i) : SV_Target
@@ -196,32 +198,62 @@
         }
 
         // 阴影渲染
-        //        Pass
-        //        {
-        //            Name "SHADOWCASTER"
-        //
-        //            Tags
-        //            {
-        //                "LightMode"="ShadowCaster"
-        //            }
-        //
-        //            ZWrite On ZTest LEqual
-        //
-        //            CGPROGRAM
-        //            #pragma target 3.0
-        //            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-        //            #pragma shader_feature_local _METALLICGLOSSMAP
-        //            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-        //            #pragma shader_feature_local _PARALLAXMAP
-        //            #pragma multi_compile_shadowcaster
-        //            #pragma multi_compile_instancing
-        //            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-        //            #pragma vertex vertShadowCaster
-        //            #pragma fragment fragShadowCaster
-        //
-        //            #include "UnityStandardShadow.cginc"
-        //            ENDCG
-        //        }
+        Pass
+        {
+            Name "SHADOWCASTER"
+
+            Tags
+            {
+                "LightMode"="ShadowCaster"
+            }
+
+            ZWrite On
+            ZTest LEqual
+            Cull Off
+
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+            #pragma shader_feature_local _METALLICGLOSSMAP
+            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+            #pragma shader_feature_local _PARALLAXMAP
+            #pragma multi_compile_shadowcaster
+            #pragma multi_compile_instancing
+            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
+            // #pragma vertex vertShadowCaster
+            // #pragma fragment fragShadowCaster
+
+            // #include "UnityStandardShadow.cginc"
+
+            //---------- 拓展 Start ----------//
+            #pragma shader_feature_local _NORMALMAP
+            #pragma shader_feature_fragment _EMISSION
+            #pragma shader_feature_local_fragment _DETAIL_MULX2
+            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
+            #pragma shader_feature_local_fragment _GLOSSYREFLECTIONS_OFF
+            #pragma multi_compile_fwdbase
+            #pragma multi_compile_fog
+            #pragma vertex vertBase
+            #pragma fragment fragShadowCasterExpand
+
+            #include "UnityStandardCoreForward.cginc"
+
+            float _SendScale;
+
+            half4 fragShadowCasterExpand(VertexOutputForwardBase i) : SV_Target
+            {
+                FRAGMENT_SETUP(s);
+                float3 pos = s.posWorld - mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz;
+
+                fixed cutout = lerp(i.tex.r - 1, i.tex.r, step(pos.y, _SendScale));
+                clip(cutout);
+
+                return fragForwardBaseInternal(i);
+            }
+
+            //---------- 拓展 End ----------//
+            ENDCG
+        }
 
         // 延期通行证
         Pass
@@ -281,62 +313,6 @@
         }
 
         //---------- 拓展 Start ----------//
-        // 阴影渲染
-        Pass
-        {
-            Name "SHADOWCASTER"
-
-            Tags
-            {
-                "LightMode"="ShadowCaster"
-            }
-
-            ZTest LEqual
-            Cull Off
-            Fog // 在加和雾中应为黑色
-            {
-                Color (0,0,0,0)
-            }
-
-            CGPROGRAM
-            #pragma target 3.0
-            #pragma shader_feature_local _NORMALMAP
-            #pragma shader_feature_local _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
-            #pragma shader_feature_fragment _EMISSION
-            #pragma shader_feature_local _METALLICGLOSSMAP
-            #pragma shader_feature_local_fragment _DETAIL_MULX2
-            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-            #pragma shader_feature_local_fragment _SPECULARHIGHLIGHTS_OFF
-            #pragma shader_feature_local_fragment _GLOSSYREFLECTIONS_OFF
-            #pragma shader_feature_local _PARALLAXMAP
-            #pragma multi_compile_fwdbase
-            #pragma multi_compile_fog
-            #pragma multi_compile_instancing
-            // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
-            // #pragma vertex vertShadowCaster
-            // #pragma fragment fragShadowCaster
-            #pragma vertex vertBase
-            #pragma fragment fragShadowCasterExpand
-
-            #include "UnityStandardCoreForward.cginc"
-
-            //---------- 拓展 Start ----------//
-            float _SendScale;
-
-            half4 fragShadowCasterExpand(VertexOutputForwardBase i) : SV_Target
-            {
-                FRAGMENT_SETUP(s);
-                float3 pos = s.posWorld - mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz;
-
-                fixed cutout = lerp(i.tex.r - 1, i.tex.r, step(pos.y, _SendScale));
-                clip(cutout);
-
-                return fragForwardBaseInternal(i);
-            }
-
-            //---------- 拓展 Start ----------//
-            ENDCG
-        }
         //---------- 拓展 End ----------//
     }
 

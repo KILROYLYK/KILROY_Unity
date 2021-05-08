@@ -52,8 +52,7 @@ Shader "_Custom/Light/Depth"
                 float invert = 1 - i.depth;
                 float color = invert * _Brightness;
 
-                if (_ScannerWidth > 0 &&
-                    _ScannerDistance > 0 &&
+                if (_ScannerWidth > 0 && _ScannerDistance > 0 &&
                     abs(i.depth - _ScannerDistance) < _ScannerWidth)
                     color = color * 2;
 
