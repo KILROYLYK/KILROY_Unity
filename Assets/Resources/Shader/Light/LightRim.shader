@@ -254,17 +254,17 @@ Shader "_Custom/Light/Rim"
             CGPROGRAM
             #pragma vertex vertRim
             #pragma fragment fragRim
-            
+
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
 
-            float _RimLightness;
             float4 _RimColor;
+            float _RimLightness;
             float _RimRadiu;
             float _RimBlur;
             float _Side;
-            float _SideWidth;
             float4 _SideColor;
+            float _SideWidth;
 
             struct a2v // 应用阶段到vertex shader阶段的数据
             {
@@ -281,7 +281,7 @@ Shader "_Custom/Light/Rim"
                 float3 view: TEXCOORD1;
             };
 
-            //定义顶点shader
+            // 定义顶点shader
             v2f vertRim(a2v v)
             {
                 v2f o;
@@ -292,21 +292,22 @@ Shader "_Custom/Light/Rim"
                 return o;
             }
 
-            //定义片元shader
+            // 定义片元shader
             float4 fragRim(v2f i) : SV_Target
             {
                 float3 light = normalize(_WorldSpaceLightPos0.xyz); // 归一化光照
 
                 // Rim
+                float radiu = 1 - _RimRadiu;
                 float diffDot = dot(i.normal, light);
                 float rimDot = 1 - dot(i.normal, i.view);
-                float rimSmooth = max(0, diffDot) * smoothstep(_RimRadiu - _RimBlur, _RimRadiu + _RimBlur, rimDot);
+                float rimSmooth = max(0, diffDot) * smoothstep(radiu - _RimBlur, radiu + _RimBlur, rimDot);
                 float3 rim = rimSmooth * _RimLightness * _RimColor * _LightColor0;
 
                 // Side
                 float3 side = lerp(_SideColor.rgb, rim, step(rimDot, 1 - _SideWidth));
 
-                float3 color = lerp(side, rim, step( _Side,0));
+                float3 color = lerp(side, rim, step(_Side, 0));
 
                 return float4(color, 1);
             }

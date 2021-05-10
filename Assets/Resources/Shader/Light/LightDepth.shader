@@ -56,8 +56,8 @@ Shader "_Custom/Light/Depth"
         [HideInInspector] _ZWrite("__zw", Float) = 1
 
         //---------- 拓展 Start ----------//
-        _Lightness("Lightness",Range(0,1)) = 0 // 亮度
-        _ShowRange("ShowRange",Range(5,100)) = 10 // 显示范围
+        _DepthColor("DepthColor", Color) = (0,0,0,1) // 深度颜色
+        _DepthRange("DepthRange",Range(5,100)) = 10 // 深度范围
         [Enum(Open,0,Close,1)] _Scanner("_Scanner",Range(0,1)) = 0 // 扫描开关
         _ScannerWidth("ScannerWidth",float) = 0 // 扫描宽度
         _ScannerDistance("ScannerDistance",float) = 0 // 扫描距离
@@ -104,9 +104,37 @@ Shader "_Custom/Light/Depth"
             #pragma multi_compile_instancing
             // #pragma multi_compile _ LOD_FADE_CROSSFADE // 抖动LOD交叉淡入淡出
             #pragma vertex vertBase
-            #pragma fragment fragBase
+            // #pragma fragment fragBase
 
             #include "UnityStandardCoreForward.cginc"
+
+            //---------- 拓展 Start ----------//
+            #pragma fragment fragBaseExpand
+
+            float4 _DepthColor;
+            float _DepthRange;
+            float _Scanner;
+            float _ScannerWidth;
+            float _ScannerDistance;
+
+            half4 fragBaseExpand(VertexOutputForwardBase i) : SV_Target
+            {
+                float depth = -UnityObjectToViewPos(i.pos).z;
+                depth = _DepthRange - depth;
+                depth = lerp(depth, 1, step(1, depth));
+
+                half4 iColor = fragForwardBaseInternal(i);
+                float3 sColor = (1 - depth) * _DepthColor;
+
+                // color = lerp(0, color, step(color, 0));
+
+                // if (_ScannerWidth > 0 && _ScannerDistance > 0 &&
+                //     abs(i.depth - _ScannerDistance) < _ScannerWidth)
+                //     color = color * 2;
+
+                // return iColor * float4(sColor, 1);
+                return float4(depth, depth, depth, 1);
+            }
             ENDCG
         }
 
@@ -233,72 +261,6 @@ Shader "_Custom/Light/Depth"
         }
 
         //---------- 拓展 Start ----------//
-        // 深度光
-        Pass
-        {
-            Name "FORWARD_DEPTH"
-
-            Tags
-            {
-                "LightMode"="ForwardBase"
-            }
-
-            Blend [_SrcBlend] One
-            Fog // 在加和雾中应为黑色
-            {
-                Color (0,0,0,0)
-            }
-
-            CGPROGRAM
-            #pragma vertex vertDepth
-            #pragma fragment fragDepth
-
-            #include "UnityCG.cginc"
-            #include "UnityStandardCoreForward.cginc"
-
-            float _Lightness;
-            float _ShowRange;
-            float _ScannerWidth;
-            float _ScannerDistance;
-
-            struct a2v
-            {
-                float2 uv: TEXCOORD;
-                float4 vertex : POSITION;
-            };
-
-            struct v2f
-            {
-                float2 uv: uv;
-                float4 vertex : SV_POSITION;
-                float depth : DEPTH;
-            };
-
-            v2f vertDepth(a2v v)
-            {
-                v2f o;
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.depth = -UnityObjectToViewPos(v.vertex).z;
-                return o;
-            }
-
-            fixed4 fragDepth(v2f i) : SV_Target
-            {
-                float4 text = tex2D(_MainTex, i.uv);
-
-                float invert = _ShowRange - i.depth;
-                invert = lerp(invert, 1, step(1, invert));
-                float3 color = invert * _Lightness;
-
-                // if (_ScannerWidth > 0 && _ScannerDistance > 0 &&
-                //     abs(i.depth - _ScannerDistance) < _ScannerWidth)
-                //     color = color * 2;
-
-                return fixed4(color, 1) * text * _Color;
-            }
-            ENDCG
-        }
         //---------- 拓展 End ----------//
     }
 

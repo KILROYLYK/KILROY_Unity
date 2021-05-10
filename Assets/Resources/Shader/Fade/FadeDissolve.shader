@@ -127,9 +127,9 @@
 
                 float degree1 = cutout / _DissolveWidth;
                 float degree2 = saturate(degree1);
+                half4 iColor = fragForwardBaseInternal(i);
                 float4 dColor = lerp(_DissolveColor_1, _DissolveColor_2, degree1) * tex2D(
                     _DissolveRamp, float2(degree2, degree2));
-                half4 iColor = fragForwardBaseInternal(i);
                 half4 sColor = lerp(iColor, dColor, step(cutout, _DissolveWidth));
 
                 return sColor;

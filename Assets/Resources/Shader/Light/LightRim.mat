@@ -67,9 +67,9 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimBlur: 0.6
+    - _RimBlur: 1
     - _RimLightness: 1
-    - _RimRadiu: 0.9
+    - _RimRadiu: 0.3
     - _Side: 1
     - _SideWidth: 0.3
     - _SmoothnessTextureChannel: 0
@@ -81,5 +81,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SideColor: {r: 1, g: 0, b: 0, a: 1}
+    - _SideColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
