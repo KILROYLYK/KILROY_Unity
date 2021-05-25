@@ -120,11 +120,17 @@ Shader "_Custom/Light/Depth"
             half4 fragBaseExpand(VertexOutputForwardBase i) : SV_Target
             {
                 float depth = -UnityObjectToViewPos(i.pos).z;
-                depth = _DepthRange - depth;
-                depth = lerp(depth, 1, step(1, depth));
+                float3 sColor = float3(0, 0, 0);
 
-                half4 iColor = fragForwardBaseInternal(i);
-                float3 sColor = (1 - depth) * _DepthColor;
+                if (depth < _DepthRange)
+                {
+                    sColor = float3(1, 1, 1);
+                }
+                // depth = _DepthRange - depth;
+                // depth = lerp(depth, 1, step(1, depth));
+                //
+                // half4 iColor = fragForwardBaseInternal(i);
+                // float3 sColor = (1 - depth) * _DepthColor;
 
                 // color = lerp(0, color, step(color, 0));
 
@@ -133,7 +139,7 @@ Shader "_Custom/Light/Depth"
                 //     color = color * 2;
 
                 // return iColor * float4(sColor, 1);
-                return float4(depth, depth, depth, 1);
+                return float4(sColor, 1);
             }
             ENDCG
         }

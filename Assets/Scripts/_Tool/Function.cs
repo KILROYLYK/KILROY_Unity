@@ -243,7 +243,7 @@ namespace KILROY.Tool
         /// </summary>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>实例</returns>
-        public static T CreateInstance<T>() { return System.Activator.CreateInstance<T>(); }
+        public static T CreateInstance<T>() { return Activator.CreateInstance<T>(); }
 
         /// <summary>
         /// 点击

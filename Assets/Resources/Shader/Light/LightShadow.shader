@@ -230,6 +230,12 @@ Shader "_Custom/Light/Shadow"
         }
 
         //---------- 拓展 Start ----------//
+        // 灯光阴影
+        Tags
+        {
+            "LightMode"="ForwardAdd"
+        }
+
         CGPROGRAM
         #pragma surface surf Lambert
 
@@ -245,11 +251,13 @@ Shader "_Custom/Light/Shadow"
             float3 viewDir;
         };
 
-        void surf(Input IN, inout SurfaceOutput o)
+        void surf(Input i, inout SurfaceOutput o)
         {
-            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;
-            o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
-            o.Emission = _SideColor.rgb * pow(1 - saturate(dot(normalize(IN.viewDir), o.Normal)), 5 - _SideLightness);
+            o.Albedo = tex2D(_MainTex, i.uv_MainTex).rgb;
+            o.Normal = UnpackNormal(tex2D(_BumpMap, i.uv_BumpMap));
+            o.Emission = _SideColor.rgb * pow(
+                1 - saturate(dot(normalize(i.viewDir), o.Normal)),
+                5 - _SideLightness);
         }
         ENDCG
         //---------- 拓展 End ----------//
