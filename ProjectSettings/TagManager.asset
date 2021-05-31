@@ -11,7 +11,6 @@ TagManager:
   - 
   - Water
   - UI
-  - PostProcess
   - 
   - 
   - 
@@ -35,8 +34,9 @@ TagManager:
   - 
   - 
   - 
-  - VideoPlay
-  - Live2D
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
