@@ -22,7 +22,7 @@ namespace KILROY.Util
         #endregion
 
         #region Event
-        
+
         public new class ButtonClickedEvent : UnityEvent<PointerEventData>
         {
         }

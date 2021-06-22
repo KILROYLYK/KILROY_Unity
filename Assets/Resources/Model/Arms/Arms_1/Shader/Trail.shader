@@ -8,11 +8,14 @@
     SubShader
     {
 
-        Tags {"Queue" = "Transparent"  "RenderType"="Transparent" }
+        Tags
+        {
+            "Queue" = "Transparent" "RenderType"="Transparent"
+        }
         ZWrite Off
         Cull Off
         Blend SrcAlpha One
-        
+
 
         Pass
         {
@@ -21,7 +24,7 @@
             #pragma fragment frag
             // make fog work
             #pragma multi_compile_fog
-            
+
             #include "UnityCG.cginc"
 
             struct appdata
@@ -42,23 +45,23 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _Color;
-            
-            v2f vert (appdata v)
+
+            v2f vert(appdata v)
             {
                 v2f o;
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.uv2 = float4(v.uv, 0 ,0);
+                o.uv2 = float4(v.uv, 0, 0);
                 float4 vertData = tex2Dlod(_MainTex, float4(o.uv, 0, 0)).rrrr;
                 v.vertex.xyz -= v.normal * 0.02;
                 v.vertex.xyz += vertData * v.normal * 0.1;
                 o.vertex = UnityObjectToClipPos(float4(v.vertex.xyz, 1));
-                UNITY_TRANSFER_FOG(o,o.vertex);
+                UNITY_TRANSFER_FOG(o, o.vertex);
                 return o;
             }
-            
-            fixed4 frag (v2f i) : SV_Target
+
+            fixed4 frag(v2f i) : SV_Target
             {
                 // sample the texture
                 fixed4 tex = tex2D(_MainTex, i.uv2);

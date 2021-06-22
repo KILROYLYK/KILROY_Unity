@@ -625,7 +625,7 @@ PrefabInstance:
     - target: {fileID: 6999235534215171379, guid: 7306e1e2866ef4f06bf0c4ad4819dab2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 2e695b441d79f4ea885a5c4102058044, type: 2}
     - target: {fileID: 6999235535056420282, guid: 7306e1e2866ef4f06bf0c4ad4819dab2, type: 3}
       propertyPath: m_Name
       value: TestRoom_2

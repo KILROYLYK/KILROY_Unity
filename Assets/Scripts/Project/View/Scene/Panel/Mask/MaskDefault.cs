@@ -19,7 +19,7 @@ namespace KILROY.Project.View
         public void Awake()
         {
             FloatList.Add("Fade", 1); // 显隐时间
-            
+
             DefaultBG = transform.Find("DefaultBG").GetComponent<Image>();
         }
 

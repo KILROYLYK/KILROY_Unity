@@ -15,7 +15,7 @@ namespace KILROY.Util
         #endregion
 
         #region Event
-        
+
         public class ClickedEvent : UnityEvent<PointerEventData>
         {
         }

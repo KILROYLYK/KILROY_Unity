@@ -76,7 +76,7 @@ namespace KILROY.Model
 
         public bool Escape = false; // 退出
         public bool EscapePress = false; // 退出-长按
-        
+
         public bool Tab = false; // 标签
         public bool TabPress = false; // 标签-长按
 
@@ -91,7 +91,7 @@ namespace KILROY.Model
 
         public bool AltLeft = false; // Alt-左
         public bool AltLeftPress = false; // Alt-左-长按
-        
+
         public bool Space = false; // 空格
         public bool SpacePress = false; // 空格-长按
     }

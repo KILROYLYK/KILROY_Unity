@@ -42,10 +42,10 @@ namespace KILROY.Controller
         /// <param name="type">日志类型</param>
         private void Listener(string content, string stack, LogType type)
         {
-            if (type == LogType.Log 
-                || type == LogType.Error 
-                || type == LogType.Warning 
-                || type == LogType.Assert 
+            if (type == LogType.Log
+                || type == LogType.Error
+                || type == LogType.Warning
+                || type == LogType.Assert
                 || type == LogType.Exception) LogList.Add(string.Format("{0}\n{1}", content, stack));
         }
 

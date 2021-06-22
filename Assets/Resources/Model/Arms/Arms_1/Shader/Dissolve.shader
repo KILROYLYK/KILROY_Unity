@@ -11,7 +11,10 @@ Shader "_Custom/Arms/Dissolve"
     }
     SubShader
     {
-        Tags { "Queue"="Geometry" "RenderType"="Opaque" }
+        Tags
+        {
+            "Queue"="Geometry" "RenderType"="Opaque"
+        }
 
         Pass
         {
@@ -20,7 +23,7 @@ Shader "_Custom/Arms/Dissolve"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            
+
             #include "UnityCG.cginc"
 
             struct appdata
@@ -44,8 +47,8 @@ Shader "_Custom/Arms/Dissolve"
             float _EdgeLength;
             fixed4 _EdgeFirstColor;
             fixed4 _EdgeSecondColor;
-            
-            v2f vert (appdata v)
+
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
@@ -53,8 +56,8 @@ Shader "_Custom/Arms/Dissolve"
                 o.uvNoiseTex = TRANSFORM_TEX(v.uv, _NoiseTex);
                 return o;
             }
-            
-            fixed4 frag (v2f i) : SV_Target
+
+            fixed4 frag(v2f i) : SV_Target
             {
                 //镂空
                 fixed cutout = tex2D(_NoiseTex, i.uvNoiseTex).r;
