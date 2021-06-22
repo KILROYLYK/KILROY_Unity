@@ -49,12 +49,13 @@ namespace KILROY.Project.View
         {
             if (Person == RolePerson.First)
             {
-                gameObject.AddComponent<Role_1_Direction>();
-                gameObject.AddComponent<Role_1_Move>();
-                gameObject.AddComponent<Role_1_Jump>();
+                gameObject.AddComponent<RoleFirstCamera>();
+                gameObject.AddComponent<RoleFirstMove>();
+                gameObject.AddComponent<RoleFirstJump>();
             }
             else if (Person == RolePerson.Third)
             {
+                gameObject.AddComponent<RoleThirdCamera>();
             }
         }
 
@@ -305,7 +306,6 @@ namespace KILROY.Project.View
         /// <summary>
         /// 检测是否处于斜坡
         /// </summary>
-        /// <returns>处于斜坡</returns>
         private void CheckIsHill()
         {
             RoleState state = RoleData.State;
@@ -364,6 +364,9 @@ namespace KILROY.Project.View
             hitList[RoleRay.Ray_2] = hit_2;
         }
 
+        /// <summary>
+        /// 更新状态
+        /// </summary>
         private void UpdateState()
         {
             RoleState state = RoleData.State;

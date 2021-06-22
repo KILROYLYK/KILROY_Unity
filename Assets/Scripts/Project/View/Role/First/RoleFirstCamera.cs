@@ -6,7 +6,7 @@ using KILROY.Tool;
 
 namespace KILROY.Project.View
 {
-    public class Role_1_Direction : BaseBehaviour
+    public class RoleFirstCamera : BaseBehaviour
     {
         #region Parameter
 
@@ -52,7 +52,7 @@ namespace KILROY.Project.View
             cameraT.rotation = Quaternion.Slerp(cameraT.rotation, Quaternion.Euler(rotationCamera), RoleData.Speed.CameraY * 10000 * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationRole), RoleData.Speed.CameraX * 10000 * Time.deltaTime);
         }
-
+        
         /// <summary>
         /// 更新位置
         /// </summary>

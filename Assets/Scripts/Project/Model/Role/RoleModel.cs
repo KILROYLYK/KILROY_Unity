@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace KILROY.Project.Model
 {
@@ -8,7 +9,7 @@ namespace KILROY.Project.Model
     public static class RoleData
     {
         public static Camera Camera = null; // 相机
-        public static CharacterController Controller = null; // 控制器
+        public static CharacterController Controller = null; // 角色控制器
         public static Animator Animator = null; // 动画器
 
         public static RoleState State = new RoleState(); // 状态

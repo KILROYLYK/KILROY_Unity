@@ -6,7 +6,7 @@ using KILROY.Tool;
 
 namespace KILROY.Project.View
 {
-    public class Role_1_Move : BaseBehaviour
+    public class RoleFirstMove : BaseBehaviour
     {
         #region Parameter
 
@@ -27,21 +27,23 @@ namespace KILROY.Project.View
         /// </summary>
         private void UpdateMove()
         {
-            float speed = !RoleData.State.IsRun ? RoleData.Speed.RoleWalk : RoleData.Speed.RoleRun;
+            RoleState state = RoleData.State;
+            RoleSpeed speed = RoleData.Speed;
+            float s = !state.IsRun ? speed.RoleWalk : speed.RoleRun;
             float x = InputController.Keyboard.AxisX;
             float y = InputController.Keyboard.AxisY;
             int angle = UIFN.GetAxiaDirection(x, y);
 
-            if (!RoleData.State.IsWalk) return; // 未移动
+            if (!state.IsWalk) return; // 未移动
 
-            if (RoleData.State.IsSquat) speed += RoleData.Speed.RoleSquat; // 蹲
-            if (RoleData.State.IsDown) speed += RoleData.Speed.RoleDown; // 趴
+            if (state.IsSquat) s += speed.RoleSquat; // 蹲
+            if (state.IsDown) s += speed.RoleDown; // 趴
 
-            if (RoleData.State.IsFly) speed += RoleData.Speed.RoleFly; // 飞
-            if (RoleData.State.IsClimb) speed += RoleData.Speed.RoleClimb; // 爬
-            if (RoleData.State.IsSwim) speed += RoleData.Speed.RoleSwim; // 游
+            if (state.IsFly) s += speed.RoleFly; // 飞
+            if (state.IsClimb) s += speed.RoleClimb; // 爬
+            if (state.IsSwim) s += speed.RoleSwim; // 游
 
-            RoleData.Controller.Move(transform.rotation * (Quaternion.AngleAxis(angle, Vector3.up) * new Vector3(0, 0, speed)));
+            RoleData.Controller.Move(transform.rotation * (Quaternion.AngleAxis(angle, Vector3.up) * new Vector3(0, 0, s)));
             RoleData.Camera.transform.position = transform.position + new Vector3(0, 1.5f, 0);
         }
     }
