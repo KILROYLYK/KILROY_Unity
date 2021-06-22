@@ -19,7 +19,9 @@ namespace KILROY.Project.View
             SwitchList.Add("ReverseX", true); // 反转X轴
             SwitchList.Add("ReverseY", false); // 反转Y轴
 
-            FloatList.Add("FollowSpeed", 50); // 跟随速度
+            FloatList.Add("SpeedHorizontal", 20000); // 横向速度
+            FloatList.Add("SpeedVertical", 20000); // 纵向
+            FloatList.Add("SpeedFollow", 50); // 跟随速度
         }
 
         // public void Start() { }
@@ -49,13 +51,13 @@ namespace KILROY.Project.View
             if (rotationCamera.x >= 85 && rotationCamera.x <= 90) rotationCamera.x = 85;
             if (rotationCamera.x >= 270 && rotationCamera.x <= 285) rotationCamera.x = 285;
 
-            cameraT.rotation = Quaternion.Slerp(cameraT.rotation, Quaternion.Euler(rotationCamera), RoleData.Speed.CameraY * 10000 * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationRole), RoleData.Speed.CameraX * 10000 * Time.deltaTime);
+            cameraT.rotation = Quaternion.Slerp(cameraT.rotation, Quaternion.Euler(rotationCamera), FloatList["SpeedHorizontal"] * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationRole), FloatList["SpeedVertical"] * Time.deltaTime);
         }
-        
+
         /// <summary>
         /// 更新位置
         /// </summary>
-        private void UpdatePosition() { UIFN.MoveTween(RoleData.Camera.transform, RoleData.Substitute.Camera.position, FloatList["FollowSpeed"]); }
+        private void UpdatePosition() { UIFN.MoveTween(RoleData.Camera.transform, RoleData.Substitute.Camera.position, FloatList["SpeedFollow"]); }
     }
 }

@@ -1,22 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
 namespace KILROY.Project.Model
 {
-    #region Data
+    #region Static
 
+    /// <summary>
+    /// 角色数据
+    /// </summary>
     public static class RoleData
     {
         public static Camera Camera = null; // 相机
         public static CharacterController Controller = null; // 角色控制器
         public static Animator Animator = null; // 动画器
+        public static float AngleY = 0; // 旋转角度
 
-        public static RoleState State = new RoleState(); // 状态
-        public static RoleSpeed Speed = new RoleSpeed(); // 速度
-        public static RoleAnimation Animation = new RoleAnimation(); // 动画
-        public static RoleRaycast Raycast = new RoleRaycast(); // 射线
-        public static RoleSubstitute Substitute = new RoleSubstitute(); // 替身节点
+        public static readonly RoleState State = new RoleState(); // 状态
+        public static readonly RoleRaycast Raycast = new RoleRaycast(); // 射线
+        public static readonly RoleAnimation Animation = new RoleAnimation(); // 动画
+        public static readonly RoleSubstitute Substitute = new RoleSubstitute(); // 替身节点
     }
 
     #endregion
@@ -65,24 +67,6 @@ namespace KILROY.Project.Model
         public bool IsDisableSwim = true; // 是否禁用游
         public bool IsDisableAttack = true; // 是否禁用攻击
         public bool IsDisableInjured = true; // 是否禁用受伤
-    }
-
-    /// <summary>
-    /// 角色速度
-    /// </summary>
-    public class RoleSpeed
-    {
-        public float CameraX = 2; // 相机垂直
-        public float CameraY = 2; // 相机水平
-        public float RoleWalk = 0.05f; // 角色走
-        public float RoleRun = 0.08f; // 角色跑
-        public float RoleSquat = -0.02f; // 角色蹲的减速
-        public float RoleDown = -0.03f; // 角色趴的减速
-        public float RoleFly = -0.02f; // 角色飞的减速
-        public float RoleClimb = -0.02f; // 角色爬的减速
-        public float RoleSwim = -0.02f; // 角色游的减速
-        public float RoleJump = 8; // 角色跳跃速度
-        public float RoleJumpA = 0.3f; // 角色跳跃加速度
     }
 
     /// <summary>
@@ -135,76 +119,9 @@ namespace KILROY.Project.Model
     }
 
     /// <summary>
-    /// 角色动画参数
+    /// 角色动画剪辑
     /// </summary>
-    public enum RoleAnimPara
-    {
-        // #region Life
-        //
-        // Born, // 出生
-        // Death, // 死亡
-        //
-        // #endregion
-        //
-        // #region Orientation
-        //
-        // Turn, // 转向
-        // AngleY, // 旋转Y轴角度
-        //
-        // #endregion
-        //
-        // #region Idle
-        //
-        // Idle, // 是否闲置
-        // IdleTimeout, // 闲置超时
-        // IdleRandom, // 随机闲置动画
-        //
-        // #endregion
-        //
-        // #region Move
-        //
-        // Move, // 是否移动
-        // Accelerate, // 是否加速
-        // SpeedXZ, // Z轴速度
-        // HillUp, // 是否上坡
-        // HillDown, // 是否下坡
-        //
-        // #endregion
-        //
-        // #region Jump
-        //
-        // Jump, // 是否跳跃
-        // SpeedY, // Y轴速度
-        //
-        // #endregion
-        //
-        // #region Climb
-        //
-        // Climb, // 是否攀爬
-        // ClimbHeight, // 攀爬高度
-        //
-        // #endregion
-        //
-        // #region Attack
-        //
-        // Attack, // 是否攻击
-        // Combo, // 连击
-        // ComboNumber, // 连击数
-        //
-        // #endregion
-        //
-        // #region Hurt
-        //
-        // Hurt, // 受伤
-        // HurtAngleY, // 受伤Y轴角度
-        //
-        // #endregion
-    }
-
-    /// <summary>
-    /// 角色动画状态
-    /// </summary>
-    public enum RoleAnimState
+    public enum RoleAnimClip
     {
         // Born,
         // Death,
