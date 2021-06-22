@@ -53,6 +53,7 @@ namespace KILROY.Project.View
 
             cameraT.rotation = Quaternion.Slerp(cameraT.rotation, Quaternion.Euler(rotationCamera), FloatList["SpeedHorizontal"] * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationRole), FloatList["SpeedVertical"] * Time.deltaTime);
+            RoleData.AngleY = transform.rotation.eulerAngles.y;
         }
 
         /// <summary>
